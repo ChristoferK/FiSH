@@ -20,7 +20,7 @@ function fn --description 'Multi-function tool for listing, creating, editing, a
         case -e --erase;
                 functions $argv
         	if [ -e "$dir/$argv[2].fish" ];
-                        COMMAND RM "$dir/$argv[2].fish"
+                        command RM "$dir/$argv[2].fish"
                 end
         case -a --all;
         	functions $argv
