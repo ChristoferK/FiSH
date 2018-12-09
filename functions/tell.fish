@@ -5,12 +5,12 @@ function tell --description 'Execute a one-line AppleScript'
 		and ECHO "Usage: tell [application|process] %app% to..."; \
 		and return (false)
 
-	[ "$argv[1]" = "process" ]; and \
-		set -l scpt (string replace -r \
+	[ "$argv[1]" = "process" ]; \
+	        and set -l scpt (string replace -r \
 			'process "?(.+?)"? to (.*)' \
 			'app "System Events" to tell process "${1}" to ${2}' \
-			"$argv"); or \
-		set -l scpt (string replace -r \
+			"$argv"); \
+		or set -l scpt (string replace -r \
 			'(app(lication)? )?"?(.+?)"? to (.*)' \
 			'app "${3}" to ${4}' \
 			"$argv")
