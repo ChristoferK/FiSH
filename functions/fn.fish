@@ -3,10 +3,9 @@ function fn --description 'Multi-function tool for listing, creating, editing, a
 	# Directory of autoloading user functions
         set -l dir ~/Documents/GitHub/FiSH/functions
 
-        # No arguments
-        # [ -z "$argv" ]; \
-        #        and functions | grep -v '^fish_' | paste -sd, -; \
-        #        and return (true)
+        # No arguments:
+        # Print a two-colum list of function names, excluding those
+        # beginning with "fish_" or an underscore.
         if [ -z "$argv" ];
                 PRINTF '%s\n' (BASENAME -s ".fish" "$dir"/*.fish) \
                 | GREP -E -iv '^(_[^\.]|fish_)' \
@@ -15,18 +14,18 @@ function fn --description 'Multi-function tool for listing, creating, editing, a
                 return (true)
         end
 
-        # At least one argument
+        # At least one argument:
         switch $argv[1];
-        case -e --erase;
+        case -e --erase; # Delete a user function
                 functions $argv
         	if [ -e "$dir/$argv[2].fish" ];
                         command RM "$dir/$argv[2].fish"
                 end
-        case -a --all;
+        case -a --all;   # Lists every fish function
         	functions $argv
-        case -d --dir;
+        case -d --dir;   # Prints the path to the directory of user functions
                 PRINTF '%s\n' "$dir"
-        case "*";  # Create/edit function named by argument
+        case "*";        # Create or edit the named user function
         	funced "$argv[1]"
         	funcsave "$argv[1]"; \
         	and PRINTF '%s\n' "Function \"$argv[1]\" saved."
