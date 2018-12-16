@@ -9,6 +9,6 @@ function itty
 				| LZMA -9 \
 				| BASE64 ))
 
-	printf "$ittyURL"
-	printf "$ittyURL" | PBCOPY
+	PRINTF "$ittyURL"
+	PRINTF "$ittyURL" | pbcopy
 end
