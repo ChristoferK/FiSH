@@ -15,6 +15,6 @@ function tell --description 'Execute a one-line AppleScript'
 			'app "${3}" to ${4}' \
 			"$argv")
 
-	OSASCRIPT -e "tell $scpt"
+	OSASCRIPT -s s -e "tell $scpt"
 	return $status
 end
