@@ -4,8 +4,12 @@ function itty
 		and ECHO "Missing input file.";
 		and return
 
+	[ -f "$argv" ];
+		and set -l html ( CAT "$argv" );
+		or  set -l html "$argv"
+
 	set -l ittyURL ( PRINTF "https://itty.bitty.site/#/%s\n" \
-				( CAT "$argv" \
+				( PRINTF '%s' "$html" \
 				| LZMA -9 \
 				| BASE64 ))
 
