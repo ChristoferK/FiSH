@@ -5,14 +5,14 @@ function itty
 		and return
 
 	[ -f "$argv" ];
-		and set -l html ( CAT "$argv" );
-		or  set -l html "$argv"
+		and CP "$argv" /tmp/itty;
+		or  ECHO -n "$argv" > /tmp/itty
 
 	set -l ittyURL ( PRINTF "https://itty.bitty.site/#/%s\n" \
-				( PRINTF '%s' "$html" \
+				( CAT /tmp/itty \
 				| LZMA -9 \
 				| BASE64 ))
 
-	PRINTF "$ittyURL"
-	PRINTF "$ittyURL" | pbcopy
+	PRINTF "%s\n" "$ittyURL"
+	PRINTF "%s" "$ittyURL" | pbcopy
 end
