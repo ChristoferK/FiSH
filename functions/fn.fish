@@ -8,7 +8,7 @@ function fn --description 'Multi-function tool for listing, creating, editing, a
         if [ -z "$argv" ];
                 printf '%s\n' (basename -s ".fish" "$dir"/*.fish) \
                 | grep -E -iv '^(_[^\.]|fish_)' \
-                | lam -f-30.30 - - 2>1
+                | lam -f-30.30 - - 2>&1
 
                 return (true)
         end
@@ -32,7 +32,7 @@ function fn --description 'Multi-function tool for listing, creating, editing, a
                                \r
                         return (true)
                 else
-        	        funced "$argv[1]" 2>1
+        	        funced "$argv[1]" 2>&1
         	        funcsave "$argv[1]"; \
         	        and printf 'Function '(% 37 3)'%s'(% 0)' saved\n' $argv[1]
                 end

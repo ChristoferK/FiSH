@@ -20,5 +20,5 @@ function trash --description 'Send files to the trash.  Uses osascript so the de
 				set f's contents to the result
 			end repeat
 			tell app \"Finder\" to delete every «class furl» in fs
-		end run" | osascript - $fs > /dev/null 2>1
+		end run" | osascript - $fs > /dev/null 2>&1
 end
