@@ -1,29 +1,29 @@
-# Defined in /var/folders/ht/0ty_c8mx16v69csh949g3rvr0000gn/T//fish.QKyxOH/apps.fish @ line 2
+# Defined in /var/folders/ht/0ty_c8mx16v69csh949g3rvr0000gn/T//fish.mUcqRM/apps.fish @ line 2
 function apps
+	set col (= $COLUMNS/2 )
+
 	if [ "$argv[1]" = "--all" ]
-		
-		OSASCRIPT -e 'tell app "Finder" to get the displayed name of ¬
-			                           every application file of ¬
-						      the entire contents of ¬
-					    	(path to applications folder)' \
-			| string split ', ' \
-			| SORT -f \
-			| LAM -f-30.30 - - ^ /dev/null
+		basename -s .app /Applications/*.app \
+		                 /Applications/*/*.app \
+				 /System/Library/CoreServices/*.app \
+			| sort -fdi \
+			| lam -f-$col.$col - - \
+			2>/dev/null
 
 	else if [ "$argv[1]" = "--bringForwardOrder" ]
 		
-		LSAPPINFO metainfo \
-		        | GREP bringForwardOrder \
-			| GREP -E -o '"[^"]+"' \
-			| TR -d "\""
+		lsappinfo metainfo \
+		        | grep bringForwardOrder \
+			| grep -E -o '"[^"]+"' \
+			| tr -d "\""
 	else
 		
-		LSAPPINFO processList \
-			| GREP -E -io '"[^"]+"' \
-			| TR -d "\"" \
-			| TR "_" " " \
-			| SORT -fu
+		lsappinfo processList \
+			| grep -E -io '"[^"]+"' \
+			| tr -d "\"" \
+			| tr "_" " " \
+			| sort -fu
 	end
 
-	return $status
+	return (true)
 end
