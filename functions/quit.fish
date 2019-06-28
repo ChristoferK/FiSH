@@ -1,4 +1,4 @@
-# Defined in /var/folders/ht/0ty_c8mx16v69csh949g3rvr0000gn/T//fish.fMU9IS/quit.fish @ line 2
+# Defined in /var/folders/ht/0ty_c8mx16v69csh949g3rvr0000gn/T//fish.M76Ab6/quit.fish @ line 2
 function quit --description 'Quit a list of applications'
 	[ -n "$argv[1]" ]; and OSASCRIPT -e \
 		"ignoring application responses

@@ -1,5 +1,6 @@
+# Defined in /var/folders/ht/0ty_c8mx16v69csh949g3rvr0000gn/T//fish.p1Cv8K/grab.fish @ line 2
 function grab --description 'Take a time-delayed window capture'
-        [ -z "$argv[1]" ]; \
+	[ -z "$argv[1]" ]; \
                 and set -l delay 5; \
                 or  set -l delay $argv[1]
 
