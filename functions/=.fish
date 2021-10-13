@@ -1,0 +1,3 @@
+function =
+    math $argv
+end
