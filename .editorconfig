@@ -10,10 +10,10 @@ insert_final_newline = true
 
 # Matches multiple files with brace expansion notation
 # Set default charset
-[**.fish]
+[functions/**.{fish,sh}]
 charset = utf-8
-indent_style = space
-indent_size = 4
+indent_style = tab
+indent_size = 8
 
 # Tab indentation (no size specified)
 [Makefile]
