@@ -1,16 +1,17 @@
 function stdin --no-scope-shadowing
-    stat -L -c %T - | read -l T
-    [ "$T" = 0 ] || return $T
+    set -l ƒ /tmp/.stdin
 
-    set -l _var $argv
-    set -l -e argv
+    begin
+        cat &
+    end >$ƒ
+    pkill -n -x cat
 
-    read -z -d \n {-a,$_var}
+    set 0 ( cat < $ƒ )
 
-    [ "$_var" ] || return 0
+    count $0 | read -l N
+    [ $N = 0 ] && return
 
-    set -e {$_var}[-1]
-    count $$_var | read -l N
-    [ "$N" = 1 ] || return $N
-    printf %s $$_var | read -at $_var
+    for I in ( seq $N )
+        set $I $0[$I]
+    end
 end

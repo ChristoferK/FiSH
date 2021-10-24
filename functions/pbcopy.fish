@@ -1,6 +1,5 @@
 function pbcopy
-    stdin Ø
-    set argv (string join -- \n $Ø "$argv" |
-          string collect -- )
-    pwsh Set-Clipboard @\"\n"$argv"\n\"@
+    stdin
+    printf %s\n "$argv" $0 |
+        command pbcopy
 end

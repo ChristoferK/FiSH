@@ -7,6 +7,7 @@ function ˈ
     set --local B \u0027
 
     commandline -i -- $A
+    commandline -C -- | read -l x
     commandline -r -- ( 
 commandline -b -- |
 string replace -a \
@@ -15,4 +16,5 @@ string replace -a \
        -r -- "(?x)
 (?! ^ | \b)$A(.*?)
 $A \B" "$B\$1$B" )
+    commandline -C -- $x
 end

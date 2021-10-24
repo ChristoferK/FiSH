@@ -1,13 +1,12 @@
 function ^
-    set -l Ø
-    stdin Ø
+    stdin
 
-    string replace --all --regex -- \
-        "(?x) (?<!\\\ ) (?:\\\ {2})*
-    @(\[[0-9. ]*\])" '\$Ø$1' \
-        "$argv" |
-        string replace --all -- \$Ø[] \$Ø |
-        read -z argv
+    string replace -a -- '$0[]' '$0' (
+string replace -ar -- "(?x)(?<!\\\
+       )(?:\\\ {2})*@(\[[0-9. ]*\])
+       " '\$0$1' ( string replace \
+       -r -- '\n' '\\\n' $argv ) ) |
+        read -z -a argv
 
-    printf %s $argv | string join -- "\n" | source
+    printf %s "$argv" | source
 end

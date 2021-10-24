@@ -1,15 +1,10 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export HOMEBREW_BREW_FILE:/home/linuxbrew/\x2elinuxbrew/bin/brew
-SETUVAR --export HOMEBREW_CELLAR:/home/linuxbrew/\x2elinuxbrew/Cellar
-SETUVAR --export HOMEBREW_LIBRARY:/home/linuxbrew/\x2elinuxbrew/Homebrew/Library
-SETUVAR --export HOMEBREW_NO_AUTO_UPDATE:1
-SETUVAR --export HOMEBREW_PREFIX:/home/linuxbrew/\x2elinuxbrew
-SETUVAR --export HOMEBREW_REPOSITORY:/home/linuxbrew/\x2elinuxbrew/Homebrew
+SETUVAR HOMEBREW_NO_AUTO_UPDATE:1
 SETUVAR __fish_initialized:3100
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
-SETUVAR fish_color_command:blue\x1e\x2d\x2ddim
+SETUVAR fish_color_command:brblue
 SETUVAR fish_color_comment:brblack
 SETUVAR fish_color_cwd:bryellow\x1e\x2d\x2ditalic
 SETUVAR fish_color_cwd_root:red
@@ -17,12 +12,12 @@ SETUVAR fish_color_end:009900
 SETUVAR fish_color_error:ff0000
 SETUVAR fish_color_escape:cyan
 SETUVAR fish_color_history_current:\x2d\x2dbold
-SETUVAR fish_color_host:5df\x1e\x2d\x2dunderline
+SETUVAR fish_color_host:55ddff\x1e\x2d\x2dunderline
 SETUVAR fish_color_host_remote:yellow
 SETUVAR fish_color_match:\x2d\x2dbackground\x3dbrblue
 SETUVAR fish_color_normal:normal
 SETUVAR fish_color_operator:1ffcfa
-SETUVAR fish_color_param:fcafca
+SETUVAR fish_color_param:brmagenta
 SETUVAR fish_color_quote:ffaa0f
 SETUVAR fish_color_redirection:00afff
 SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
@@ -36,4 +31,4 @@ SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR fish_user_paths:/home\x1e/home/CK\x1e/home/linuxbrew/\x2elinuxbrew\x1e/home/linuxbrew/\x2elinuxbrew/Cellar\x1e/home/linuxbrew/\x2elinuxbrew/bin
+SETUVAR fish_user_paths:/Users/CK\x1e/usr/local/bin\x1e/usr/bin\x1e/bin\x1e/usr/sbin\x1e/sbin\x1e/Users/CK/\x2econfig/fish\x1e/Users/CK/\x2econfig/fishconf\x2ed\x1e/usr/local/Cellar/fish/3\x2e3\x2e1/bin\x1e/Users/CK/\x2econfig/fish/functions\x1e/usr/local/Cellar/fish/3\x2e3\x2e1/etc/fish/functions\x1e/usr/local/Cellar/fish/3\x2e3\x2e1/share/fish/vendor_functions\x2ed\x1e/usr/local/share/fish/vendor_functions\x2ed\x1e/usr/local/Cellar/fish/3\x2e3\x2e1/share/fish/functions

@@ -1,4 +1,3 @@
 function ls
-    command ls -FAXx --color=auto --hyperlink=auto \
-        --group-directories-first $argv
+    command ls -FLAG -h $argv
 end
