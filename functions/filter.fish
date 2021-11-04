@@ -1,22 +1,25 @@
 function filter
-    set -l chars ( string split -- "" $argv )
-    not [ "$chars[1]" != \{ ]
-    and [ "$chars[-1]" = \} ] || return ( 
-err Script must be enclosed in {...} )
+		set --local chars ( string split \
+		                    --  "" $argv )
+		not [ "$chars[1]" != \{ ]
+		and [ "$chars[-1]" = \} ]
+		or  return ( err Script must be \
+		             enclosed in {...}  )
 
-    set argv ( string replace -r -- '^\{' "begin " "$argv" |
-           string replace -r -- '\}$' " ; end" |
-           string join -- \n | string collect -- )
+		set argv ( string replace -r -- '^\{' "begin " "$argv" |
+		           string replace -r -- '\}$' " ; end"         |
+		           string join -- \n | string collect --       )
 
-    stdin
+		stdin || return ( err stdin = {} )
 
-    set -l _N ( count $0 )
-    set -l _I ( seq  $_N )
+		set --local I ( seq  $N )
 
-    for I in $_I
-        string replace --all -- @ "$$I" "$argv" |
-            source &>/dev/null || set -e $I
-    end
+		for _I in $I
+			string replace --all -- \
+			       @ "$$_I" "$argv" |
+			       source &>/dev/null
+			or set --erase $_I
+		end
 
-    printf %s\n $$_I
+		printf %s\n $$I
 end

@@ -1,4 +1,3 @@
 function math
-    stdin
-    builtin math $argv $0 + 0
+		builtin math $argv + 0
 end

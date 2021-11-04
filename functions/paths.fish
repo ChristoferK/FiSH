@@ -1,3 +1,3 @@
 function paths
-    n= path $argv | uniq
+		N= path-to $argv | uniq
 end

@@ -1,9 +1,12 @@
-set fish_features ( status features | 
-                    string match -r \
-		    -- \\H+ )
+set -U fish_features ( 
+	 status features | 
+     string match -r \
+            -- '\H+' )
 
-for feature in $fish_features
-	status test-feature $feature ||
-	exec fish --features=( string \
-	     join -- , $fish_features )
-end
+status features | 
+string match -r \
+-- '\H+(?=\toff)' || exit 0
+
+exec fish --features=( 
+	  string join -- \
+	, $fish_features )

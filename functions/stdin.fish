@@ -1,17 +1,27 @@
 function stdin --no-scope-shadowing
-    set -l ƒ /tmp/.stdin
+		set --erase --global -- 0 N
+		set -- 0
+		set -- N 0
 
-    begin
-        cat &
-    end >$ƒ
-    pkill -n -x cat
+		not [ -t 0 ]
+		or  return 1
 
-    set 0 ( cat < $ƒ )
+		read --delimiter=\n \
+		     --null --array 0
+		set  --erase 0[-1]
 
-    count $0 | read -l N
-    [ $N = 0 ] && return
+		string replace --all --regex --         [(
+		string escape  --style=regex -- $TOKENS  |
+		string escape  -- )] '\\\$0' $0 | cat -n |
+		string replace --regex -- ^ set | source
 
-    for I in ( seq $N )
-        set $I $0[$I]
-    end
+		count $0 | read N
+
+		[ $N != 1 ]
+		and  return
+
+		set 0 $1
+		count $0 | read N
+		printf '%s\n'  $1 |
+		read -L  ( seq $N )
 end

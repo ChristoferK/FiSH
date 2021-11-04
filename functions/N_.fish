@@ -1,8 +1,12 @@
 function N_
-    set -l R $status
+		𝔼=$pipestatus begin
+			not [ "$argv" ]
+			and set argv $𝔼
+		end
 
-    not [ "$argv" ]
-    and return {$R}
+		math {+,$argv} |
+		read --local 𝔼
 
-    return ( builtin math {$argv,x} 1 )
+		math 1 - 2 x 0^$𝔼
+		return $𝔼
 end

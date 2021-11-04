@@ -1,9 +1,11 @@
 function fn
-    ! [ "$argv" ] && basename -s .fish \
-        $fish_function_path[1]/*.fish |
-        string join -- \40 | fold -sw \
-        $COLUMNS && return
+		[ ! "$argv" ] && basename -s ".fish" \
+			"$fish_function_path[1]"/*.fish  |
+			string join -- \40 | fold -s -w  \
+			"$COLUMNS" && return
 
-    funced ( string escape -- $argv )
-    and funcsave "$argv"
+		Fn=( string escape -- "$argv"
+		) begin funced   "$Fn"
+			and funcsave "$Fn"
+		end
 end

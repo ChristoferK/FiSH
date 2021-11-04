@@ -14,14 +14,14 @@ set __CF_USER_TEXT_ENCODING          0x0:0:2
 set __fish_active_key_bindings       fish_default_key_bindings
 set __fish_bin_dir                   /usr/local/Cellar/fish/$FISH_VERSION/bin
 set __fish_config_dir                $HOME/.config/fish
-set __fish_config_interactive_done   
+set __fish_config_interactive_done
 set __fish_data_dir                  /usr/local/Cellar/fish/$FISH_VERSION/share/fish
 set __fish_git_prompt_showupstream   auto
 set __fish_help_dir                  /usr/local/Cellar/fish/$FISH_VERSION/share/doc/fish
 set __fish_initialized               3100
 set __fish_last_bind_mode            default
 set __fish_locale_vars               LANG  LC_{ALL,COLLATE,CTYPE,MESSAGES,MONETARY,NUMERIC,TIME}
-set __fish_machine                   
+set __fish_machine
 set __fish_prompt_status_generation  92
 set __fish_sysconf_dir               /usr/local/Cellar/fish/$FISH_VERSION/etc/fish
 set __fish_user_data_dir             $HOME/.local/share/fish
@@ -72,7 +72,8 @@ set fish_prompt_hg_status_unmerged   !
 set fish_prompt_hg_status_untracked  '?'
 set fish_user_paths                  $HOME /usr/local/bin /usr/bin /bin /usr/sbin /sbin $__fish_config_dir{,conf.d} $__fish_bin_dir $fish_function_path
 set umask                            0022
-set FiSH_BLOCKS                      begin case else for function if switch while
-set FiSH_TOKENS                      '!#$"\'%&()*-.;<>?[]^|~'
-set __kill_signals                   ( command kill -l | string \
+set BLOCKS                           begin case else for function if switch while
+set TOKENS                           '!#$"\'%&()*-.;<>?[]^|~'
+set SIGNALS                          ( command kill -l | string \
                                        match --all --regex \\H+ )
+set FS                               \u2060
