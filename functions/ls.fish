@@ -1,3 +1,3 @@
 function ls
-    command ls -FLAG -h $argv
+		command ls -FLAG -h $argv
 end

@@ -1,3 +1,3 @@
 function =
-    math $argv
+		math $argv
 end

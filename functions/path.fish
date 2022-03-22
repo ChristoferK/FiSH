@@ -1,3 +1,3 @@
 function path
-    path-to $argv
+		path-to $argv
 end
