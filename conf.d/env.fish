@@ -76,4 +76,5 @@ set BLOCKS                           begin case else for function if switch whil
 set TOKENS                           '!#$"\'%&()*-.;<>?[]^|~'
 set SIGNALS                          ( command kill -l | string \
                                        match --all --regex \\H+ )
+set SIG                              $SIGNALS
 set FS                               \u2060

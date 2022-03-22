@@ -1,22 +1,37 @@
-function map
-    set -l chars ( string split -- "" $argv )
-    not [ "$chars[1]" != \{ ]
-    and [ "$chars[-1]" = \} ] || return ( 
-err Script must be enclosed in {...} )
+function map --no-scope-shadowing
+		string replace --re --filter -- '(?xs)^
+		                 (?: ( [^-=\h{]+ ) = )?
+		                 (\{)  [ \H\h ]*  (\})$
+		                 ' '$2 $3 $1' "$argv" |
+		                 read --local --array ϟ
+		not [ "$ϟ[1 2]" = "{ }" ]
+		and return ( err Script \
+		    must be enclosed in \
+		    {...}. )
 
-    set argv ( string replace -r -- '^\{' "begin " "$argv" |
-           string replace -r -- '\}$' " ; end" |
-           string join -- \n | string collect  -- )
-    stdin
+		set -l -- ϟ $ϟ[3]
+		begin set -- "$ϟ"
+		      set -S "$ϟ"
+		end &>/dev/null
 
-    set -l _N ( count $0 )
-    set -l _I ( seq  $_N )
+		and set ϟ {set,-a,-g,$ϟ}
+		and set -q $ϟ[4] &&
+		    set -e  ϟ[3] || true
 
-    for I in $_I
-        set $I ( string replace --all \
-         -- "@" "$$I" "$argv" |
-         source )
-    end
+		or  err {Error,token:,$ϟ}
+		or  set ϟ {printf,'%s\n'}
 
-    printf %s\n $$_I
+		set argv ( string replace -r -- '^.*?\{' \
+		'' $argv | string replace -r -- '\}$' \; |
+		           string collect --             )
+
+		stdin
+
+		for I in ( seq $N )
+		      $ϟ ( string replace -a -- "@" \
+		           "\"$$I\"" $argv | source |
+		           string collect --        )
+		end | read -z
+
+		true
 end

@@ -1,14 +1,16 @@
 function stdin --no-scope-shadowing
-		set --erase --global -- 0 N
-		set -- 0
-		set -- N 0
+		count $0 | read -- N
+		[ ! -t 0 ] || return
 
-		not [ -t 0 ]
-		or  return 1
+		while read --token \
+		           --array Ø
+		      math -- $N + 1 |
+		      read --  N
+		      set  -- $N  $Ø
+		      set  -a  0 "$Ø"
+		end
 
-		read --delimiter=\n \
-		     --null --array 0
-		set  --erase 0[-1]
+		return
 
 		string replace --all --regex --         [(
 		string escape  --style=regex -- $TOKENS  |

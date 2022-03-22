@@ -1,12 +1,14 @@
-set -U fish_features ( 
-	 status features | 
+set -U fish_features (
+     status features |
      string match -r \
             -- '\H+' )
 
-status features | 
-string match -r \
--- '\H+(?=\toff)' || exit 0
+     status features |
+     string match -r \
+     -- "(?x) \H+ (?=
+              \t off
+         )" || exit 0
 
-exec fish --features=( 
+exec fish --features=(
 	  string join -- \
 	, $fish_features )

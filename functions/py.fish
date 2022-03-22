@@ -1,3 +1,3 @@
 function py
-    python $argv
+		python $argv
 end
