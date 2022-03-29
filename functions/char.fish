@@ -1,7 +1,6 @@
 function char
-		chars=( string split -- "" $argv )
-		begin printf %s {$chars,\40} \n 1>&2
-		      printf %x%s {\"$chars,\40}
-		end &| column -t
-		true
+		chars=( string split -- "" "$argv"
+		) begin printf %-3s "" $chars \n
+		        printf %-3x  \'$chars
+		end # | column -t
 end

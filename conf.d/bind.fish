@@ -13,7 +13,7 @@ bind  -k  end         end-of-line
 bind  -k  home        beginning-of-line
 bind  --  \u0027      \u02C8
 bind  --  \e\x20      'commandline -i \u00A0'
-bind  --  \#          'commandline -r "$history[1]"'
+bind  --  !!          'commandline -i "( $history[1] )"'
 bind  --  `           'commandline -i ϟ'
 bind  --  £           'commandline -i \#'
 bind  --  ∫           'commandline -i ʃ'
@@ -22,11 +22,12 @@ bind  --  ß           'commandline -i ʃ'
 bind  --  Í           'commandline -i Ʃ'
 bind  --  \es         'commandline -i ʃ'
 bind  --  \eS         'commandline -i Ʃ'
-bind  --  \e\[114\;7u repaint             # ⟨ctrl⟩+⟨alt⟩+r
-bind  --  \e\[122\;7u undo                # ⟨ctrl⟩+⟨alt⟩+z
-bind  --  \e\[90\;7u  redo                # ⟨shift⟩+⟨ctrl⟩+⟨alt⟩+z
-bind  --  \e\[13\;2u  'commandline -i \n' # ⟨shift⟩+⟨enter⟩
-bind  --  \e\[32\;2u  'commandline -i \ ' # ⟨shift⟩+⟨space⟩
+bind  --  \e\[114\;7u repaint                # ⟨ctrl⟩+⟨alt⟩+r
+bind  --  \e\[122\;7u undo                   # ⟨ctrl⟩+⟨alt⟩+z
+bind  --  \e\[90\;7u  redo                   # ⟨shift⟩+⟨ctrl⟩+⟨alt⟩+z
+bind  --  \e\[13\;2u  'commandline -i \n'    # ⟨shift⟩+⟨enter⟩
+bind  --  \e\[32\;2u  'commandline -i \ '    # ⟨shift⟩+⟨space⟩
+bind  --  \u00A0      'commandline -i "$FS"' # ⟨L-alt⟩+⟨space⟩
 bind  --  \cc         'commandline "" ; emit fish_cancel'
 bind  --  ...         'commandline -i "‥ "'
 

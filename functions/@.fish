@@ -1,8 +1,12 @@
 function @
+		set --local -- ℓ  --line
+		argparse  L/line  -- $argv
+		[ "$_flag_line" ] || set ℓ
+
 		not set --{local,query}   ϟ
 		and set --{local,} ϟ argv[]
-		and begin stdin    &&
-			ϟ=dev[stdin] @ $0
+		and begin stdin $ℓ &&
+			ϟ=":[stdin]" @ $0
 		end
 
 		count {$argv} | read -l N

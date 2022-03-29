@@ -1,5 +1,5 @@
 function escape
-		stdin
+		stdin || return
 
 		string replace --all --regex -- [(
 		printf %b $argv \\c$argv $TOKENS |

@@ -1,9 +1,10 @@
 function path-abbr
-		stdin && set --append argv $0
-		[ "$argv" ] || set -l argv $PWD
+		stdin
+		set argv "$argv" $0
+		[ "$argv" ] || 
+		set argv "$PWD"
 
-		string replace -r -- "^$HOME" "~" $argv |
-		string replace -r -a -- '(?x) / \.*  [^/]
-		                          \K  [^/]* (?=/)
-		                        ' ""
+		string replace -r  -- ^$HOME \~ $argv  |
+		string replace -ra -- '(?x) /\.*[^./]
+                                       \K [^/]* (?=/)' ''
 end

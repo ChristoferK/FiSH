@@ -6,8 +6,8 @@ set -U fish_features (
      status features |
      string match -r \
      -- "(?x) \H+ (?=
-              \t off
-         )" || exit 0
+              \t off)
+        " || exit 000
 
 exec fish --features=(
 	  string join -- \

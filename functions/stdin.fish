@@ -1,28 +1,42 @@
 function stdin --no-scope-shadowing
-		count $0 | read -- N
-		[ ! -t 0 ] || return
+		[  ! -t 0 \
+		] || return
 
-		while read --token \
-		           --array Ø
-		      math -- $N + 1 |
-		      read --  N
-		      set  -- $N  $Ø
-		      set  -a  0 "$Ø"
-		end
+	  # count $0 | read -- N
+		set  --global N 0
+		set  --global 0
 
-		return
+		argparse L/line -- $argv
+		printf {1,$_flag_line} 0 |
+		read --local line
 
-		string replace --all --regex --         [(
-		string escape  --style=regex -- $TOKENS  |
-		string escape  -- )] '\\\$0' $0 | cat -n |
-		string replace --regex -- ^ set | source
+	  # while read --token \
+	  #            --array Ø
+	  #       math -- $N + 1 |
+	  #       read --  N
+	  #       set  -- $N  $Ø
+	  #       set  -a  0 ( string  \
+	  #                    escape  \
+	  #                    -- "$Ø" )
+	  # end
 
-		count $0 | read N
+		TOKENS=( string escape  --style=regex  -- \
+		       ( string join    -- "" $TOKENS  )  |
+		         string escape  -- ) begin cat -n |
+		         string replace --all --regex  -- \
+		                        [$TOKENS] '\\\$0' |
+		         string replace --regex  -- "(?x) ^
+		                           \h+ ( [0-9]+ )
+		                           \t  ( .* ) " '
+		                           set -- $1 $2
+		                           set -a 0 "\$$1"
+		                           set -g N  $1'
+		end | source
 
-		[ $N != 1 ]
-		and  return
+		[ $N = $line \
+		] ||  return 0
 
-		set 0 $1
+		set -- 0 $1
 		count $0 | read N
 		printf '%s\n'  $1 |
 		read -L  ( seq $N )

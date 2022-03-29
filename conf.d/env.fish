@@ -1,11 +1,11 @@
-set HOME                             /Users/CK
+set USER                             CK
+set HOME                             /Users/$USER
 set HOMEBREW_NO_AUTO_UPDATE          1
 set IFS                              \n\ \t
 set LANG                             en_GB.UTF-8
-set LOGNAME                          CK
+set LOGNAME                          $USER
 set SHELL                            /usr/local/bin/fish
 set TERM                             xterm-256color
-set USER                             CK
 set VIRTUAL_ENV_DISABLE_PROMPT       true
 set XDG_CONFIG_HOME                  $HOME/.config
 set XPC_FLAGS                        0x0
