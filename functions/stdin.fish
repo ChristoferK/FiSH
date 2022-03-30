@@ -1,10 +1,8 @@
 function stdin --no-scope-shadowing
-		[  ! -t 0 \
-		] || return
-
-	  # count $0 | read -- N
-		set  --global N 0
-		set  --global 0
+		set --global N 0
+		set --erase    0
+		[ ! -t 0 ]
+		or  return
 
 		argparse L/line -- $argv
 		printf {1,$_flag_line} 0 |

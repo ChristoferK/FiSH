@@ -1,7 +1,11 @@
 not status is-interactive
 and exit -1
 
-abbr -g -a  --  ck     'abbr -g -a --'
+function Ʃ
+		abbr --global --add \
+		     -- "$argv[1]"  \
+		        "$argv[2..]"
+end
 
-ck  ϟ+     'commandline -i'
-ck  ...    ‥
+Ʃ  ϟ+    commandline -i
+Ʃ  ...   ‥

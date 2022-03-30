@@ -1,3 +1,4 @@
 function =
-		math $argv
+		printf %s "$argv"    |
+		tr "（）×÷–" "()*/-"
 end

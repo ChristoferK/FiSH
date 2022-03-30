@@ -1,3 +1,10 @@
 function math
-		builtin math $argv + 0
+		argparse --name=math s/scale= \
+		                     b/base=  -- $argv
+
+		stdin
+
+		printf %s "$argv+$0+0" | builtin math \
+		                    {-s,$_flag_scale} \
+		                    {-b,$_flag_base}
 end

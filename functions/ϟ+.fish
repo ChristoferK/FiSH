@@ -1,3 +1,3 @@
 function ϟ+
-    commandline -i $argv
+		commandline -i "$argv"
 end

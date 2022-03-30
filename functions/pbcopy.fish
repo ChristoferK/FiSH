@@ -1,10 +1,9 @@
 function pbcopy
 		set argv "$argv"
 		not [ "$argv" ]
-		and begin stdin
-		    set argv $0
-		end
+		and stdin &&
+		set argv  $0
 
-		printf %s\n $argv |
+		string join -- \n $argv |
 		command pbcopy
 end
