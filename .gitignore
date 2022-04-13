@@ -1,5 +1,6 @@
 .DS_Store
 .vscode/
+tide/
 functions/tide/
 functions/.*.fish
 functions/fish_*.fish
