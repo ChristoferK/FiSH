@@ -1,4 +1,6 @@
 function on:preexec --no-scope-shadowing --on-event fish_preexec
+		  return 
+
 		  set --erase ( set --names |
 		      string match  --regex \
 		             -- "^[0-9]+\$" ) 2>&- 1>&2

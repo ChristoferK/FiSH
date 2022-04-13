@@ -1,3 +1,3 @@
 function ^
-		map $argv
+		map "{ $argv }"
 end

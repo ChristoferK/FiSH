@@ -1,8 +1,5 @@
 function 'on:var[COLUMNS]' --on-variable COLUMNS
-		tabs ( string join   -- '' 1,4 (
-		       string repeat -n ( math \
-		       $COLUMNS/4 - 1 ) -- ,+4 )
-		     ) &>/dev/null || tabs 1,4,(
-		       printf %s, +4{,,,,,,,,} \
-		                  +4{,,,,,,} )+4
+		  tabs 1,8,( string join -- "," \
+		                   +4{,,,,}{,,} )
+		# tabs 1,( seq -s, 8 4 $COLUMNS )
 end

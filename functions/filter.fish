@@ -1,25 +1,42 @@
 function filter
-		set --local chars ( string split \
-		                    --  "" $argv )
-		not [ "$chars[1]" != \{ ]
-		and [ "$chars[-1]" = \} ]
-		or  return ( err Script must be \
-		             enclosed in {...}  )
+		string replace -rf -- '(?xs)
+		    ^ (?: ( [^-=\h{]+ ) = )?
+		      ( \{ ) [\H\h]* ( \} )
+		    $' '$2 $3 $1' "$argv" |
+		read --local --array -- ϟ
+		and [ "$ϟ[1 2]" = "{ }" ]
+		or  return ( err Script \
+		    must be enclosed in \
+		    {...}. )
 
-		set argv ( string replace -r -- '^\{' "begin " "$argv" |
-		           string replace -r -- '\}$' " ; end"         |
-		           string join -- \n | string collect --       )
+		set --local ϟ $ϟ[3]
+		begin set -- "$ϟ"
+		      set -S "$ϟ"
+		end &>/dev/null
 
-		stdin || return ( err stdin = {} )
+		and set  ϟ {set,-a,-g,$ϟ}
+		and set -q $ϟ[4] &&
+		    set -e  ϟ[3] || true
 
-		set --local I ( seq  $N )
+		or  err  {Error,token:,$ϟ}
+		or  set  ϟ {printf,'%s\n'}
 
-		for _I in $I
-			string replace --all -- \
-			       @ "$$_I" "$argv" |
-			       source &>/dev/null
-			or set --erase $_I
-		end
+		string replace --regex \
+		         --all -- '(?xs)
+		         ^ .*? \{ | \} $
+		         ' ''  {$argv} |
+		         read -z argv
 
-		printf %s\n $$I
+		stdin
+
+		for I in ( seq $N )
+ 		    string replace -a -r -- \
+		           "(?x)(?<! (\\\ ) ) 
+		           ((?1){2})* \K @" (
+		    string escape --no-quot \
+		           -- "$$I" ) $argv |
+		    source &>/dev/null
+
+		    and $ϟ $0[$I]
+		end | read -z
 end

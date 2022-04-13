@@ -4,5 +4,5 @@ function escape
 		string replace --all --regex -- [(
 		printf %b $argv \\c$argv $TOKENS |
 		string escape  --style=regex --  |
-		string escape  -- )] '\\\$0' $0
+		string escape  -n -- )] '\\\$0' $0
 end

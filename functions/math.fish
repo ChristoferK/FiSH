@@ -4,7 +4,7 @@ function math
 
 		stdin
 
-		printf %s "$argv+$0+0" | builtin math \
-		                    {-s,$_flag_scale} \
-		                    {-b,$_flag_base}
+		printf %s "$argv + $0 + 0" |
+		builtin math {-s,$_flag_s} \
+		             {-b,$_flag_b}
 end

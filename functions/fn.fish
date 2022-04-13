@@ -4,10 +4,12 @@ function fn
 		or  [ ! "$argv" \
 		    ] && return
 
-		set --local FiSH $argv[1]
-		basename -s .fish "$FiSH" |
-		       ^ { path  "@.fish"
-		       } | read -L "FiSH"
+		set --local FUNCPATH "$fish_function_path[1]"
+		set --local ƒn ( basename -s .fish "$argv[1]" )
+		set --local FiSH "$FUNCPATH/$ƒn.fish"
+
+		[ ! -f "$FiSH" ] && printf '%s\n' \
+		"function $ƒn" \t\t end > "$FiSH"
 
 		NUL= switch $ϟ
 		       case {fn-,}edit
@@ -16,22 +18,19 @@ function fn
 		       case {fn-,}{show,cat} funcat
 		            cat -n "$FiSH"
 		       case $NUL fn \*
-		            FiSH="$fish_function_path[1]"/{.,}*.fish \
-		            ƒn=$argv[1] switch $ƒn
-		                        case $NUL
-		                             basename -s .fish $FiSH |
-		                             string join    -- \040  |
-		                             fold  -s -w $COLUMNS 1>&2
-		                        case \*
-		                          #  basename -s .fish $FiSH |
-		                          #  string match  --  $argv |
-		                          #  string escape --  |
-		                          #  read --local ƒn  ||
-		                          #  set  --local ƒn   $argv[1]
-		                             string escape -- $ƒn |
-		                             read  --local --  ƒn
-		                             funced --save -- $ƒn
-		            end # switch $argv
+		            switch $ƒn
+		              case $NUL
+		                   source "$FiSH"
+		              case \*
+		                #  basename -s .fish $FiSH |
+		                #  string match  --  $argv |
+		                #  string escape --  |
+		                #  read --local ƒn  ||
+		                #  set  --local ƒn   $argv[1]
+		                   string escape -- $ƒn |
+		                   read  --local --  ƒn
+		                   funced --save -- $ƒn
+		            end # switch $ƒn
 		end # switch $ϟ
 
 		ϟ=$ϟ fn $argv[2..]

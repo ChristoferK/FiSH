@@ -30,7 +30,7 @@ bind  --  \e\[32\;2u   'commandline -i \ '    # ⟨shift⟩+⟨space⟩
 bind  --  \u00A0       'commandline -i "$FS"' # ⟨L-alt⟩+⟨space⟩
 bind  --  \cc          'commandline "" ; emit fish_cancel'
 bind  --  ...          'commandline -i "‥ "'
-bind  --  =            'commandline -i = ; set fish_bind_mode math'
+# bind  --  =            'commandline -i = ; set fish_bind_mode math'
 
 bind  -M  math ''       self-insert
 bind  -M  math ' '      self-insert expand-abbr
